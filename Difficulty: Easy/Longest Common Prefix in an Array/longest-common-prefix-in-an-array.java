@@ -28,32 +28,17 @@ class GFG
 class Solution{
     String longestCommonPrefix(String arr[], int n){
         // code here
-        if (n == 0) {
-            return "-1";
-        }
+        String result = arr[0];
         
-        // Find the shortest string in the array
-        String minStr = arr[0];
-        for (int i = 1; i < n; i++) {
-            if (arr[i].length() < minStr.length()) {
-                minStr = arr[i];
-            }
-        }
-        
-        // Use the shortest string to find the common prefix
-        StringBuilder prefix = new StringBuilder();
-        
-        outer:
-        for (int i = 0; i < minStr.length(); i++) {
-            char currentChar = minStr.charAt(i);
-            for (int j = 0; j < n; j++) {
-                if (arr[j].charAt(i) != currentChar) {
-                    break outer; // No need to check further
+        for(int i=1; i<n; i++){
+            while(arr[i].indexOf(result) != 0){
+                result = result.substring(0,result.length()-1);
+                
+                if(result.isEmpty()){
+                    return "-1";
                 }
             }
-            prefix.append(currentChar);
         }
-        
-        return prefix.length() == 0 ? "-1" : prefix.toString();
+        return result;
     }
 }
